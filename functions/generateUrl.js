@@ -18,7 +18,8 @@ exports.handler = async event => {
     longUrl: String
   });
 
-  const Link = mongoose.model("Link", LinkSchema);
+  mongoose.model("Link", LinkSchema);
+  const Link = mongoose.model("Link");
 
   try {
     const { longUrl } = event;
@@ -27,8 +28,10 @@ exports.handler = async event => {
       throw new Error("You must specify longUrl");
     }
 
+    const url = new URL(longUrl);
     const hashid = await generateUniqueURL(Link);
-    await Link.create({ hashid, longUrl });
+    await Link.create({ hashid, longUrl: url.href });
+
     return {
       statusCode: 200,
       body: JSON.stringify({
