@@ -45,7 +45,7 @@ export default {
     Footer
   },
   computed: {
-    ...mapState(["longURL"])
+    ...mapState(["longURL", "error"])
   },
   mounted() {
     this.$store.dispatch("redirectToLongURL", this.$route);
