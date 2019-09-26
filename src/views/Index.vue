@@ -12,7 +12,7 @@
               'border-red-700': error,
               'border-transparent': !error
             }"
-            class="md:w-5/6 h-10 bg-gray-200 text-gray-600 w-full rounded px-2 focus:outline-none border-tra"
+            class="md:w-5/6 h-10 bg-gray-200 text-gray-700 w-full rounded px-2 focus:outline-none border-tra"
             v-model="url"
             type="text"
             name="url"
