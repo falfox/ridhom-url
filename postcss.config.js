@@ -8,7 +8,8 @@ module.exports = {
     autoprefixer(),
     process.env.NODE_ENV === "production"
       ? purgecss({
-          content: ["./src/**/*.html", "./src/**/*.vue"]
+          content: ["./src/**/*.html", "./src/**/*.vue"],
+          defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || []
         })
       : ""
   ]
