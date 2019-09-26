@@ -1,10 +1,14 @@
 "use strict";
 const mongoose = require("mongoose");
 const { MONGO_USER, MONGO_PASSWD } = process.env;
+const querystring = require("querystring");
 
 let conn = null;
 
 exports.handler = async (event, context) => {
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, body: "Method Not Allowed" };
+  }
   context.callbackWaitsForEmptyEventLoop = false;
   // See https://www.mongodb.com/blog/post/serverless-development-with-nodejs-aws-lambda-mongodb-atlas
   if (conn == null) {
@@ -26,7 +30,8 @@ exports.handler = async (event, context) => {
   const Link = conn.model("Link");
 
   try {
-    const { longUrl } = event;
+    const params = querystring.parse(event.body);
+    const { longUrl } = params;
 
     if (longUrl === undefined) {
       throw new Error("You must specify longUrl");
