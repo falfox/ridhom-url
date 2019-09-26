@@ -2,6 +2,7 @@
 const mongoose = require("mongoose");
 const { MONGO_USER, MONGO_PASSWD } = process.env;
 const querystring = require("querystring");
+const url = require("url");
 
 let conn = null;
 
@@ -38,9 +39,9 @@ exports.handler = async (event, context) => {
       throw new Error("You must specify longUrl");
     }
 
-    const url = new URL(longUrl);
+    const validUrl = url.parse(longUrl);
     const hashid = await generateUniqueURL(Link);
-    await Link.create({ hashid, longUrl: url.href });
+    await Link.create({ hashid, longUrl: validUrl.href });
 
     return {
       statusCode: 200,
