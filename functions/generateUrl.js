@@ -2,24 +2,28 @@
 const mongoose = require("mongoose");
 const { MONGO_USER, MONGO_PASSWD } = process.env;
 
-exports.handler = async event => {
-  mongoose.connect(
-    `mongodb+srv://${MONGO_USER}:${MONGO_PASSWD}@cluster0-lphjz.mongodb.net/test?retryWrites=true&w=majority`,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    }
-  );
+let conn = null;
 
-  const Schema = mongoose.Schema;
+exports.handler = async (event, context) => {
+  context.callbackWaitsForEmptyEventLoop = false;
+  // See https://www.mongodb.com/blog/post/serverless-development-with-nodejs-aws-lambda-mongodb-atlas
+  if (conn == null) {
+    conn = await mongoose.createConnection(
+      `mongodb+srv://${MONGO_USER}:${MONGO_PASSWD}@cluster0-lphjz.mongodb.net/test?retryWrites=true&w=majority`,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        bufferCommands: false,
+        bufferMaxEntries: 0
+      }
+    );
+    conn.model(
+      "Link",
+      new mongoose.Schema({ hashid: String, longUrl: String })
+    );
+  }
 
-  const LinkSchema = new Schema({
-    hashid: String,
-    longUrl: String
-  });
-
-  mongoose.model("Link", LinkSchema);
-  const Link = mongoose.model("Link");
+  const Link = conn.model("Link");
 
   try {
     const { longUrl } = event;
