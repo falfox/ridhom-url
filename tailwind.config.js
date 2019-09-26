@@ -4,7 +4,8 @@ module.exports = {
   },
   variants: {
     boxShadow: ["responsive", "hover", "focus", "active"],
-    width: ["responsive"]
+    width: ["responsive"],
+    flex: ["responsive"]
   },
   plugins: []
 };
