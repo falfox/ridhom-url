@@ -10,7 +10,8 @@ export default new Vuex.Store({
       url: "",
       error: null
     },
-    urls: []
+    urls: [],
+    longUrl: null
   },
   mutations: {
     changeUrl(state, value) {
@@ -24,6 +25,9 @@ export default new Vuex.Store({
     },
     setError(state, value) {
       state.form.error = value;
+    },
+    setLongUrl(state, value) {
+      state.longUrl = value;
     }
   },
   actions: {
@@ -52,6 +56,21 @@ export default new Vuex.Store({
       element.select();
       document.execCommand("copy");
       element.setAttribute("type", "hidden");
+    },
+    async redirectToLongURL({ commit }, router) {
+      try {
+        const hashid = router.params.pathMatch.replace(/\//, "");
+        console.log(hashid);
+        // const response = await fetch("/.netlify/functions/getLongURL", {
+        //   method: "POST",
+        //   body: ""
+        // });
+        // const json = await response.json();
+        // commit("generateUrl", json.longURL);
+      } catch (e) {
+        console.log(e);
+        commit("setError", "URL is not valid, or something bad happen");
+      }
     }
   }
 });
