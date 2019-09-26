@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "mongoose": "^5.7.1",
     "vue": "^2.6.10",
     "vuex": "^3.0.1"
   },

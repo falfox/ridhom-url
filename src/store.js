@@ -33,12 +33,9 @@ export default new Vuex.Store({
       try {
         longURL = new URL(state.form.url);
         setTimeout(function() {
-          const randomId = Math.random()
-            .toString(36)
-            .slice(-6);
           commit("setLoading", false);
           commit("generateUrl", {
-            id: randomId,
+            id: "test",
             longURL
           });
         }, 2000);
