@@ -67,12 +67,12 @@ export default new Vuex.Store({
       commit("setLoading", false);
     },
     copyURL(context, url) {
-      let element = document.querySelector(`[data-url="${url}"]`);
+      const element = document.querySelector(`[data-url="${url}"]`);
       element.setAttribute("type", "text");
       element.select();
       document.execCommand("copy");
       element.setAttribute("type", "hidden");
-      let svg = document.querySelector(`[data-svg="${url}"]`);
+      const svg = document.querySelector(`[data-svg="${url}"]`);
       svg.setAttribute("opacity", 1);
       setTimeout(function() {
         svg.setAttribute("opacity", 0.3);
