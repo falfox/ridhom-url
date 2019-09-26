@@ -72,7 +72,7 @@ export default new Vuex.Store({
       element.select();
       document.execCommand("copy");
       element.setAttribute("type", "hidden");
-      let svg = document.querySelector(`[data-url="${url}"]`);
+      let svg = document.querySelector(`[data-svg="${url}"]`);
       svg.setAttribute("opacity", 1);
       setTimeout(function() {
         svg.setAttribute("opacity", 0.3);
