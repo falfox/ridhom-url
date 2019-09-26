@@ -89,7 +89,10 @@ export default new Vuex.Store({
     initializeStore({ state }) {
       if (localStorage.getItem("urls")) {
         // Replace the state object with the stored item
-        state.urls = JSON.parse(localStorage.getItem("urls"));
+        this.replaceState({
+          ...state,
+          urls: JSON.parse(localStorage.getItem("urls"))
+        });
       }
     }
   }
