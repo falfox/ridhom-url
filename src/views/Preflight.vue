@@ -17,9 +17,17 @@
           <p class="text-lg pt-10 text-gray-700 font-medium">
             Redirecting you to
           </p>
-          <p class="bg-gray-300 px-2 py-1 mt-2 mb-10 rounded">
-            <span v-for="n in 6" :key="n">&middot; </span>
-          </p>
+          <span class="bg-gray-300 px-2 py-1 mt-2 mb-10 rounded">
+            <div v-if="!longURL">
+              <span v-for="n in 6" :key="n">&middot; </span>
+            </div>
+            <div v-else>
+              {{ longURL }}
+            </div>
+            <div v-if="error">
+              {{ error }}
+            </div>
+          </span>
         </div>
       </div>
     </main>
@@ -37,10 +45,10 @@ export default {
     Footer
   },
   computed: {
-    ...mapState(['longUrl'])
+    ...mapState(["longURL"])
   },
   mounted() {
-    this.$store.dispatch('redirectToLongURL', this.$route);
+    this.$store.dispatch("redirectToLongURL", this.$route);
   }
 };
 </script>

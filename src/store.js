@@ -11,7 +11,7 @@ export default new Vuex.Store({
       error: null
     },
     urls: [],
-    longUrl: null
+    longURL: null
   },
   mutations: {
     changeUrl(state, value) {
@@ -26,7 +26,7 @@ export default new Vuex.Store({
     setError(state, value) {
       state.form.error = value;
     },
-    setLongUrl(state, value) {
+    setLongURL(state, value) {
       state.longUrl = value;
     }
   },
@@ -57,16 +57,26 @@ export default new Vuex.Store({
       document.execCommand("copy");
       element.setAttribute("type", "hidden");
     },
-    async redirectToLongURL({ commit }, router) {
+    async redirectToLongURL({ commit, state }, router) {
       try {
         const hashid = router.params.pathMatch.replace(/\//, "");
         console.log(hashid);
-        // const response = await fetch("/.netlify/functions/getLongURL", {
-        //   method: "POST",
-        //   body: ""
-        // });
-        // const json = await response.json();
-        // commit("generateUrl", json.longURL);
+        const response = await fetch("/.netlify/functions/getLongURL", {
+          method: "POST",
+          body: JSON.stringify({
+            hashid
+          })
+        });
+
+        if (response.status == 200) {
+          const json = await response.json();
+          commit("setLongURL", json.longURL);
+          setTimeout(function() {
+            window.location.href = state.longUrl;
+          }, 2000);
+        } else {
+          commit("setError", "URL is not valid, or something bad happen");
+        }
       } catch (e) {
         console.log(e);
         commit("setError", "URL is not valid, or something bad happen");
