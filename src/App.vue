@@ -38,7 +38,7 @@
         <h2 class="font-medium text-gray-800 pb-2 pt-2">My Links</h2>
         <div class="max-w-4xl rounded bg-white shadow">
           <div v-if="urls.length > 0">
-            <URLItem v-for="url in urls" :key="url.id" :url="url"></URLItem>
+            <URLItem v-for="url in urls" :key="url.hashid" :url="url"></URLItem>
           </div>
           <div v-else class="text-center py-8">
             <p class="text-lg font-medium text-gray-800">You have no links</p>

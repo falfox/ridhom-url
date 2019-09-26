@@ -3,16 +3,16 @@
     <div class="text-sm flex items-center">
       <div class="w-3/4">
         <a
-          :href="`https://u.ridhom.dev/${url.id}`"
+          :href="`https://u.ridhom.dev/${url.hashid}`"
           target="_blank"
           class="text-teal-900 font-normal"
         >
-          https://u.ridhom.dev/{{ url.id }}
+          https://u.ridhom.dev/{{ url.hashid }}
         </a>
         <input
           type="hidden"
-          :id="url.id"
-          :value="`https://u.ridhom.dev/${url.id}`"
+          :id="url.hashid"
+          :value="`https://u.ridhom.dev/${url.hashid}`"
         />
         <p class="text-gray-500 font-light truncate">
           {{ url.longURL }}
@@ -21,7 +21,7 @@
       <div class="w-1/4 flex justify-end">
         <button
           class="bg-green-200 text-green-800 w-12 h-12 rounded-full flex justify-center focus:outline-none focus:shadow-outline"
-          @click="copyURL(url.id)"
+          @click="copyURL(url.hashid)"
         >
           <svg
             class="fill-current w-6 h-6"

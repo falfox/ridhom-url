@@ -27,21 +27,23 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    generateUrl({ commit, state }) {
+    async generateUrl({ commit, state }) {
       commit("setLoading", true);
       let longURL;
       try {
         longURL = new URL(state.form.url);
-        setTimeout(function() {
-          commit("setLoading", false);
-          commit("generateUrl", {
-            id: "test",
+        const response = await fetch("/.netlify/functions/generateUrl", {
+          method: "POST",
+          body: JSON.stringify({
             longURL
-          });
-        }, 2000);
+          })
+        });
+        const json = await response.json();
+        commit("setLoading", false);
+        commit("generateUrl", json);
       } catch (e) {
         commit("setLoading", false);
-        commit("setError", "URL is not valid");
+        commit("setError", "URL is not valid, or something bad happen");
       }
     },
     copyURL(context, url) {
