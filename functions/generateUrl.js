@@ -31,6 +31,7 @@ exports.handler = async (event, context) => {
 
   try {
     const params = querystring.parse(event.body);
+    console.log(params);
     const { longUrl } = params;
 
     if (longUrl === undefined) {
