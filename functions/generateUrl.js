@@ -1,7 +1,6 @@
 "use strict";
 const mongoose = require("mongoose");
 const { MONGO_USER, MONGO_PASSWD } = process.env;
-const querystring = require("querystring");
 const url = require("url");
 
 let conn = null;
@@ -24,7 +23,7 @@ exports.handler = async (event, context) => {
     );
     conn.model(
       "Link",
-      new mongoose.Schema({ hashid: String, longUrl: String })
+      new mongoose.Schema({ hashid: String, longURL: String })
     );
   }
 
@@ -33,22 +32,22 @@ exports.handler = async (event, context) => {
   try {
     const params = JSON.parse(event.body);
     console.log(params);
-    const { longUrl } = params;
+    const { longURL } = params;
 
-    if (longUrl === undefined) {
-      throw new Error("You must specify longUrl");
+    if (longURL === undefined) {
+      throw new Error("You must specify longURL");
     }
 
-    const validUrl = url.parse(longUrl);
+    const validUrl = url.parse(longURL);
     const hashid = await generateUniqueURL(Link);
-    await Link.create({ hashid, longUrl: validUrl.href });
+    await Link.create({ hashid, longURL: validUrl.href });
 
     return {
       statusCode: 200,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         hashid,
-        longUrl
+        longURL
       })
     };
   } catch (e) {
@@ -68,7 +67,7 @@ async function generateUniqueURL(Link) {
       .toString(36)
       .slice(-6);
 
-    Link.count({ hashid }, function(err, count) {
+    Link.countDocuments({ hashid }, function(err, count) {
       if (err) reject(err);
       if (count > 0) {
         return generateUniqueURL();
