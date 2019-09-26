@@ -14,20 +14,22 @@
       <div class="rounded-lg bg-white shadow-lg mx-3 -mt-48 mb-10">
         <div class="px-3 pt-3 pb-1 flex flex-col items-center justify-center">
           <img src="../assets/cute.webp" alt="cute cats" />
-          <p class="text-lg pt-10 text-gray-700 font-medium">
-            Redirecting you to
-          </p>
-          <span class="bg-gray-300 px-2 py-1 mt-2 mb-10 rounded">
-            <div v-if="!longURL">
-              <span v-for="n in 6" :key="n">&middot; </span>
-            </div>
-            <div v-else>
-              {{ longURL }}
-            </div>
-            <div v-if="error">
-              {{ error }}
-            </div>
-          </span>
+          <div v-if="error">
+            {{ error }}
+          </div>
+          <div v-else>
+            <p class="text-lg pt-10 text-gray-700 font-medium">
+              Redirecting you to
+            </p>
+            <span class="bg-gray-300 px-2 py-1 mt-2 mb-10 rounded">
+              <div v-if="longURL">
+                {{ longURL }}
+              </div>
+              <div v-else>
+                <span v-for="n in 6" :key="n">&middot; </span>
+              </div>
+            </span>
+          </div>
         </div>
       </div>
     </main>
