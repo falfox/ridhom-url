@@ -67,7 +67,7 @@ export default new Vuex.Store({
       commit("setLoading", false);
     },
     copyURL(context, url) {
-      let element = document.querySelector(`#${url}`);
+      let element = document.querySelector(`[data-url="${url}"]`);
       element.setAttribute("type", "text");
       element.select();
       document.execCommand("copy");

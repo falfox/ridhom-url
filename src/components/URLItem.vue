@@ -11,7 +11,7 @@
         </a>
         <input
           type="hidden"
-          :id="url.hashid"
+          :data-url="url.hashid"
           :value="`https://u.ridhom.dev/${url.hashid}`"
         />
         <p class="text-gray-500 font-light truncate">
