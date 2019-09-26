@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 const { MONGO_USER, MONGO_PASSWD } = process.env;
 
-export async function handler(event) {
+exports.handler = async (event) {
   mongoose.connect(
     `mongodb+srv://${MONGO_USER}:${MONGO_PASSWD}@cluster0-lphjz.mongodb.net/test?retryWrites=true&w=majority`,
     {
