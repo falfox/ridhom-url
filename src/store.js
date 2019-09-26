@@ -32,6 +32,12 @@ export default new Vuex.Store({
     },
     setLongURL(state, value) {
       state.longURL = value;
+    },
+    initializeStore(state) {
+      if (localStorage.getItem("urls")) {
+        // Replace the state object with the stored item
+        state.urls = JSON.parse(localStorage.getItem("urls"));
+      }
     }
   },
   actions: {
@@ -84,15 +90,6 @@ export default new Vuex.Store({
       } catch (e) {
         console.log(e);
         commit("setUrlError", "URL is not found, or something bad happen");
-      }
-    },
-    initializeStore({ state }) {
-      if (localStorage.getItem("urls")) {
-        // Replace the state object with the stored item
-        this.replaceState({
-          ...state,
-          urls: JSON.parse(localStorage.getItem("urls"))
-        });
       }
     }
   }
