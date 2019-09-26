@@ -34,7 +34,7 @@ exports.handler = async (event, context) => {
     console.log(params);
     const { longURL } = params;
 
-    if (longURL === undefined) {
+    if (!longURL) {
       throw new Error("You must specify longURL");
     }
 

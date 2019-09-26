@@ -33,7 +33,7 @@ exports.handler = async (event, context) => {
     console.log(params);
     const { hashid } = params;
 
-    if (hashid === undefined) {
+    if (!hashid) {
       throw new Error("You must specify longURL");
     }
 

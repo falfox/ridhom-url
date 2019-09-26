@@ -76,7 +76,7 @@ export default new Vuex.Store({
           const json = await response.json();
           commit("setLongURL", json.longURL);
           setTimeout(function() {
-            window.location.assign(state.longUrl);
+            window.location.assign(state.longURL);
           }, 2000);
         } else {
           commit("setUrlError", "URL is not found, or something bad happen");
