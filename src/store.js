@@ -11,7 +11,8 @@ export default new Vuex.Store({
       error: null
     },
     urls: [],
-    longURL: null
+    longURL: null,
+    urlError: null
   },
   mutations: {
     changeUrl(state, value) {
@@ -26,8 +27,11 @@ export default new Vuex.Store({
     setError(state, value) {
       state.form.error = value;
     },
+    setUrlError(state, value) {
+      state.urlError = value;
+    },
     setLongURL(state, value) {
-      state.longUrl = value;
+      state.longURL = value;
     }
   },
   actions: {
@@ -75,11 +79,11 @@ export default new Vuex.Store({
             window.location.href = state.longUrl;
           }, 2000);
         } else {
-          commit("setError", "URL is not valid, or something bad happen");
+          commit("setUrlError", "URL is not found, or something bad happen");
         }
       } catch (e) {
         console.log(e);
-        commit("setError", "URL is not valid, or something bad happen");
+        commit("setUrlError", "URL is not found, or something bad happen");
       }
     }
   }
