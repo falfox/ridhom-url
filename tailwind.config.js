@@ -3,7 +3,8 @@ module.exports = {
     extend: {}
   },
   variants: {
-    boxShadow: ["responsive", "hover", "focus", "active"]
+    boxShadow: ["responsive", "hover", "focus", "active"],
+    width: ["responsive"]
   },
   plugins: []
 };
