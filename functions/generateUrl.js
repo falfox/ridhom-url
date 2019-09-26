@@ -31,7 +31,7 @@ exports.handler = async (event, context) => {
   const Link = conn.model("Link");
 
   try {
-    const params = querystring.parse(event.body);
+    const params = JSON.parse(event.body);
     console.log(params);
     const { longUrl } = params;
 
@@ -45,6 +45,7 @@ exports.handler = async (event, context) => {
 
     return {
       statusCode: 200,
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         hashid,
         longUrl
@@ -53,6 +54,7 @@ exports.handler = async (event, context) => {
   } catch (e) {
     return {
       statusCode: 400,
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         message: `${e.message}`
       })
