@@ -18,8 +18,17 @@ const router = new VueRouter({
 
 Vue.use(VueRouter);
 
+store.subscribe((mutation, state) => {
+  // Store the state object as a JSON string
+  if (mutation.type === "generateUrl") {
+    localStorage.setItem("urls", JSON.stringify(state.urls));
+  }
+});
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
+  beforeCreate() {
+    this.$store.commit("initializeStore");
+  }
 }).$mount("#app");

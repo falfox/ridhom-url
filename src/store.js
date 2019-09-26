@@ -85,6 +85,12 @@ export default new Vuex.Store({
         console.log(e);
         commit("setUrlError", "URL is not found, or something bad happen");
       }
+    },
+    initializeStore({ state }) {
+      if (localStorage.getItem("urls")) {
+        // Replace the state object with the stored item
+        state.urls = JSON.parse(localStorage.getItem("urls"));
+      }
     }
   }
 });
