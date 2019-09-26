@@ -45,20 +45,26 @@ export default new Vuex.Store({
       commit("setLoading", true);
       let longURL;
       try {
-        longURL = new URL(state.form.url);
-        const response = await fetch("/.netlify/functions/generateUrl", {
-          method: "POST",
-          body: JSON.stringify({
-            longURL
-          })
-        });
-        const json = await response.json();
-        commit("setLoading", false);
-        commit("generateUrl", json);
+        if (
+          !state.form.url.startsWith("http://") ||
+          !state.form.url.startsWith("https://")
+        ) {
+          commit("setError", "Please include http:// or https:// protocol");
+        } else {
+          longURL = new URL(state.form.url);
+          const response = await fetch("/.netlify/functions/generateUrl", {
+            method: "POST",
+            body: JSON.stringify({
+              longURL
+            })
+          });
+          const json = await response.json();
+          commit("generateUrl", json);
+        }
       } catch (e) {
-        commit("setLoading", false);
         commit("setError", "URL is not valid, or something bad happen");
       }
+      commit("setLoading", false);
     },
     copyURL(context, url) {
       let element = document.querySelector(`#${url}`);
