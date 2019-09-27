@@ -28,7 +28,8 @@ export default {
     }
   },
   actions: {
-    initStore({ dispatch }) {
+    initStore({ dispatch, commit }) {
+      commit("SET_LOAD", true);
       dispatch("validate");
     },
     async validate({ commit }) {
@@ -36,8 +37,8 @@ export default {
       if (responseKey) {
         const user = await auth.createUser(responseKey);
         commit("SET_CURRENT_USER", user);
-        commit("SET_LOAD", false);
       }
+      commit("SET_LOAD", false);
     },
     externalLogin({ state }, provider) {
       const { auth } = state;
