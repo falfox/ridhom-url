@@ -139,7 +139,7 @@ export default {
   },
   methods: {
     ...mapActions("form", ["generateUrl"]),
-    ...mapActions("auth", ["logout"]),
+    ...mapActions("auth", ["loginExternalUrl", "logout"]),
     toggleDropdown() {
       this.isOpen = !this.isOpen;
     }
