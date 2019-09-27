@@ -30,6 +30,7 @@ export default {
   },
   actions: {
     initStore({ dispatch }) {
+      console.log("CALLED");
       dispatch("validate");
     },
     async validate({ commit }) {
