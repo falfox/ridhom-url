@@ -102,12 +102,7 @@
 </template>
 
 <script>
-import {
-  createNamespacedHelpers,
-  mapGetters,
-  mapState,
-  mapActions
-} from "vuex";
+import { mapGetters, mapState, mapActions } from "vuex";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import URLItem from "@/components/URLItem";
