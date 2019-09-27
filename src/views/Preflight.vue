@@ -18,14 +18,18 @@
           <img
             v-if="error"
             src="../assets/sad.webp"
-            alt="cute cats"
+            alt="sad cat"
             class="w-full"
+            key="sad"
+            rel="preload"
           />
           <img
             v-else
             src="../assets/cute.webp"
-            alt="cute cats"
+            alt="cute cat"
             class="w-full"
+            key="cute"
+            rel="preload"
           />
           <div v-if="error" class="py-8 text-gray-700 font-medium text-center">
             {{ error }}
