@@ -18,7 +18,7 @@ router.beforeEach(async (to, from, next) => {
       const hash = to.hash.replace(/#/, "");
       const query = querystring.parse(hash);
       window.localStorage.setItem("auth.response", JSON.stringify(query));
-      store.dispatch("initStore");
+      store.dispatch("auth/initStore");
       next({ path: "/" });
     } catch (e) {
       console.log(e);
