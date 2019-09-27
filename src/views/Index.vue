@@ -35,7 +35,6 @@
         </div>
       </div>
       <div class="my-8 px-3 container mx-auto max-w-2xl">
-        <Modal :showModal="showModal" @close="showModal = false"> </Modal>
         <div class="flex justify-between items-center">
           <h2 class="font-medium text-gray-800 pb-2 pt-2">My Links</h2>
           <div v-if="!loading" class="relative">
@@ -82,6 +81,7 @@
             >
               Login to Save Links
             </button>
+            <Modal :showModal="showModal" @close="showModal = false"> </Modal>
           </div>
         </div>
         <div class="max-w-4xl rounded bg-white shadow">
