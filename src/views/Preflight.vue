@@ -2,9 +2,11 @@
   <div class="antialiased min-h-screen flex flex-col">
     <header class="text-center bg-teal-800">
       <div class="containern mx-auto">
-        <a href="/">
-          <h1 class="text-white font-bold text-2xl py-24">ridhom URL</h1>
-        </a>
+        <h1 class="text-white font-bold text-2xl py-24">
+          <a href="/">
+            ridhom URL
+          </a>
+        </h1>
         <span class="text-teal-200 font-medium text-xl p-10 inline-block"
           >Turn long url to relatively short one</span
         >
@@ -13,12 +15,20 @@
     <main class="max-w-lg mx-auto w-auto flex-grow">
       <div class="rounded-lg bg-white shadow-lg mx-3 -mt-48 mb-10">
         <div class="px-3 pt-3 pb-1">
-          <img src="../assets/cute.webp" alt="cute cats" class="w-full" />
-          <div
-            v-if="urlError"
-            class="text-lg py-8 text-gray-700 font-medium text-center"
-          >
-            {{ urlError }}
+          <img
+            v-if="error"
+            src="../assets/sad.webp"
+            alt="cute cats"
+            class="w-full"
+          />
+          <img
+            v-else
+            src="../assets/cute.webp"
+            alt="cute cats"
+            class="w-full"
+          />
+          <div v-if="error" class="py-8 text-gray-700 font-medium text-center">
+            {{ error }}
           </div>
           <span v-else class="text-center pb-10">
             <p class="text-lg pt-10 pb-2 text-gray-700 font-medium">
@@ -45,7 +55,8 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { createNamespacedHelpers } from "vuex";
+const { mapState } = createNamespacedHelpers("preflight");
 import Footer from "@/components/Footer";
 
 export default {
@@ -54,10 +65,10 @@ export default {
     Footer
   },
   computed: {
-    ...mapState(["longURL", "urlError"])
+    ...mapState(["longURL", "error"])
   },
   mounted() {
-    this.$store.dispatch("redirectToLongURL", this.$route);
+    this.$store.dispatch("preflight/redirectToLongURL", this.$route);
   }
 };
 </script>

@@ -41,7 +41,8 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { createNamespacedHelpers } from "vuex";
+const { mapActions } = createNamespacedHelpers("urls");
 
 export default {
   props: ["url"],

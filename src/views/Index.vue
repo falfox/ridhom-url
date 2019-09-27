@@ -54,7 +54,9 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { createNamespacedHelpers } from "vuex";
+const { mapState, mapActions } = createNamespacedHelpers("form");
+const { mapGetters } = createNamespacedHelpers("urls");
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import URLItem from "@/components/URLItem";
@@ -69,22 +71,15 @@ export default {
   computed: {
     url: {
       get() {
-        return this.$store.state.form.url;
+        return this.$store.state.url;
       },
       set(value) {
-        this.$store.commit("changeUrl", value);
-        this.$store.commit("setError", null);
+        this.$store.commit("form/changeUrl", value);
+        this.$store.commit("form/setError", null);
       }
     },
-    isLoading() {
-      return this.$store.state.isLoading;
-    },
-    urls() {
-      return this.$store.state.urls.slice().reverse();
-    },
-    error() {
-      return this.$store.state.form.error;
-    }
+    ...mapState(["isLoading", "error"]),
+    ...mapGetters(["urls"])
   },
   methods: {
     ...mapActions(["generateUrl"])
