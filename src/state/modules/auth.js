@@ -12,8 +12,7 @@ export default {
     currentUser: null,
     loading: true,
     loggedIn: false,
-    token: null,
-    auth
+    token: null
   },
   getters: {
     loggedIn(state) {
@@ -37,8 +36,8 @@ export default {
       if (responseKey) {
         const user = await auth.createUser(responseKey);
         commit("SET_CURRENT_USER", user);
+        commit("TOGGLE_LOAD");
       }
-      commit("TOGGLE_LOAD");
     },
     externalLogin({ state }, provider) {
       const { auth } = state;
