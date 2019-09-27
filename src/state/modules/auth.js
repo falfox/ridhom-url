@@ -40,8 +40,7 @@ export default {
       }
       commit("SET_LOAD", false);
     },
-    externalLogin({ state }, provider) {
-      const { auth } = state;
+    externalLogin(context, provider) {
       const url = auth.loginExternalUrl(provider);
       window.location.href = url;
     },
