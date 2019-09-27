@@ -2,7 +2,7 @@
   <transition name="modal">
     <div v-if="showModal">
       <div
-        class="modal fixed w-full h-full top-0 left-0 flex items-center justify-center"
+        class="modal fixed w-full h-full top-0 left-0 flex items-center justify-center z-40"
       >
         <div
           class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"
