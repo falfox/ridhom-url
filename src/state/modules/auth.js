@@ -23,8 +23,8 @@ export default {
     SET_CURRENT_USER(state, value) {
       state.currentUser = value;
     },
-    TOGGLE_LOAD(state) {
-      state.loading = !state.loading;
+    SET_LOAD(state, value) {
+      state.loading = value;
     }
   },
   actions: {
@@ -36,7 +36,7 @@ export default {
       if (responseKey) {
         const user = await auth.createUser(responseKey);
         commit("SET_CURRENT_USER", user);
-        commit("TOGGLE_LOAD");
+        commit("SET_LOAD", false);
       }
     },
     externalLogin({ state }, provider) {
