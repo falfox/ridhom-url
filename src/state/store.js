@@ -10,7 +10,7 @@ const store = new Vuex.Store({
 
 store.subscribe((mutation, state) => {
   // Store the state object as a JSON string
-  console.log(mutation.type);
+  console.log(mutation.type, mutation.payload);
   if (mutation.type === "form/generateUrl") {
     localStorage.setItem("urls", JSON.stringify(state.urls));
   }
